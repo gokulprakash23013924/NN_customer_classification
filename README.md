@@ -1,5 +1,3 @@
-# Developing a Neural Network Classification Model
-
 ## AIM
 
 To develop a neural network classification model for the given dataset.
@@ -14,7 +12,7 @@ You are required to help the manager to predict the right group of the new custo
 
 ## Neural Network Model
 
-<img width="1004" height="842" alt="image" src="https://github.com/user-attachments/assets/78cb1a4b-ee7d-4c8c-bd67-bb66c212a1a8" />
+<img width="756" height="809" alt="489861149-0509383a-d594-4eb5-aa28-237dc84ae6d5" src="https://github.com/user-attachments/assets/9aa34031-97ec-42d1-9866-721149ecb9e7" />
 
 ## DESIGN STEPS
 
@@ -51,15 +49,17 @@ Display the confusion matrix, classification report, and predictions.
 class PeopleClassifier(nn.Module):
     def __init__(self, input_size):
         super(PeopleClassifier, self).__init__()
-        self.fc1 = nn.Linear(input_size, 32)
-        self.fc2 = nn.Linear(32, 16)
-        self.fc3 = nn.Linear(16, 8)
-        self.fc4 = nn.Linear(8, 4)
+        self.fc1 = nn.Linear(input_size, 64)
+        self.fc2 = nn.Linear(64, 32)
+        self.fc3 = nn.Linear(32, 16)
+        self.fc4 = nn.Linear(16, 8)
+        self.fc5 = nn.Linear(8, 4)
     def forward(self, x):
         x=F.relu(self.fc1(x))
         x=F.relu(self.fc2(x))
         x=F.relu(self.fc3(x))
-        x=self.fc4(x)
+        x=F.relu(self.fc4(x))
+        x=self.fc5(x)
         return x
 
 ```
@@ -68,6 +68,8 @@ class PeopleClassifier(nn.Module):
 model =PeopleClassifier(input_size=X_train.shape[1])
 criterion =nn.CrossEntropyLoss()
 optimizer =optim.Adam(model.parameters(),lr=0.001)
+
+train_model(model,train_loader,criterion,optimizer,epochs=100)
 
 ```
 ```python
@@ -97,16 +99,17 @@ def train_model(model,train_loader,criterion,optimizer,epochs):
 
 ### Confusion Matrix
 
-<img width="551" height="462" alt="image" src="https://github.com/user-attachments/assets/1caffd9d-b454-443e-b921-50557be27503" />
+<img width="539" height="455" alt="download" src="https://github.com/user-attachments/assets/018a3b90-bfea-41e3-bc23-3f9d0de82f76" />
+
 
 ### Classification Report
 
-<img width="456" height="335" alt="image" src="https://github.com/user-attachments/assets/dbe600e5-caac-4f89-be8b-c61692ae7593" />
+<img width="392" height="324" alt="image" src="https://github.com/user-attachments/assets/5241f941-53ec-448d-9dbb-a649767f1cea" />
 
 
 ### New Sample Data Prediction
 
-<img width="768" height="291" alt="image" src="https://github.com/user-attachments/assets/021bf641-cdf0-44ed-be69-16e84e00cc39" />
+<img width="751" height="269" alt="image" src="https://github.com/user-attachments/assets/4d2a1ca0-aac4-48bb-a53e-556c7826a1fd" />
 
 ## RESULT
 Thus, a neural network classification model for the given dataset as been created successfully.
